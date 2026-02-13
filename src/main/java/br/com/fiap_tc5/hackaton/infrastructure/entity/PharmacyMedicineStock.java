@@ -12,26 +12,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Entity
-@Table(name = "pharmacy_medicine_stock")
+@Table(name = "pharmacy_medicine_stock",
+        indexes = {
+                @Index(name = "idx_pharmacy", columnList = "pharmacy_id"),
+                @Index(name = "idx_medicine", columnList = "medicine_code")
+        })
 public class PharmacyMedicineStock {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private PharmacyMedicineStockId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pharmacy_id", nullable = false)
-    private Pharmacy pharmacyId;
+    @MapsId("cnpj")
+    private Pharmacy pharmacy;
 
-    @Column(name = "medicine_code", nullable = false)
-    private String medicineCode;//entidade de medicamento
-
-    @Column(name = "medicine_name", nullable = false)
-    private String medicineName;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "indication_category_id", nullable = false)
-    private IndicationCategory indicationCategoryId;//entidade de categoria de indicação
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "medicine_code",nullable = false)
+    @MapsId("medicineCode")
+    private MedicationName medication;
 
     private Integer quantity;
 
@@ -39,7 +38,7 @@ public class PharmacyMedicineStock {
     @Column(name = "stock_status", nullable = false)
     private StockStatus stockStatus;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime updatedAt;
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime    updatedAt;
 
 }

@@ -1,13 +1,18 @@
 package br.com.fiap_tc5.hackaton.infrastructure.entity;
 
-import br.com.fiap_tc5.hackaton.medicamentos.infrastructure.entity.medicamento.Medicamento;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
-@Table(name = "indiciation_category")
+@Table(name = "indication_category")
 public class IndicationCategory {
 
     @Id
@@ -17,8 +22,8 @@ public class IndicationCategory {
     @Column(name = "indication", length = 150, nullable = false)
     private String indication;
 
-    @OneToMany(mappedBy = "indicationCategoryId")
+    @OneToMany(mappedBy = "indicationCategory")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<PharmacyMedicineStock> pharmacyMedicineStocks;
+    private List<MedicationName> medicationName;
 
 }

@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -34,10 +34,10 @@ public class Pharmacy {
     private String neighborhood;
 
     @Column(name = "accreditation_date")
-    private Date accreditationDate;
+    private LocalDate accreditationDate;
 
-    @OneToMany(mappedBy = "pharmacyId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pharmacy", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<PharmacyMedicineStock> pharmacyMedicineStock;
+    private List<PharmacyMedicineStock> stocks;
 
 }
