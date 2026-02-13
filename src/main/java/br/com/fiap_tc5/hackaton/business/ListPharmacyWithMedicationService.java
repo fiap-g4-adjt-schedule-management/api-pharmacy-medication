@@ -32,6 +32,7 @@ public class ListPharmacyWithMedicationService {
             throw  new ResourceNotFoundException("No stock information is available for accredited pharmacies in the specified region.");
         }
 
+        feedBackService.savedFeedback(stock);
 
         return  stock;
     }

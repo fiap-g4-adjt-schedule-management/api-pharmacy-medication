@@ -18,22 +18,7 @@ public class FeedBackService {
     private final FeedbackRepository feedbackRepository;
     private final ObjectMapper objectMapper;
 
-    public void saveFeedbackPharmacyandMedication(List<PharmacyMedicineStockResponse> request) {
-        try {
-            String consultationJson = objectMapper.writeValueAsString(request);
-
-            FeedBack feedBack = new FeedBack(
-                    consultationJson,
-                    true
-            );
-            feedbackRepository.save(feedBack);
-
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Erro ao converter lista para JSON", e);
-        }
-    }
-
-    public void saveFeedbackPharmacy(List<PharmacyResponse> request) {
+    public void savedFeedback(List<?> request) {
         try {
             String consultationJson = objectMapper.writeValueAsString(request);
 

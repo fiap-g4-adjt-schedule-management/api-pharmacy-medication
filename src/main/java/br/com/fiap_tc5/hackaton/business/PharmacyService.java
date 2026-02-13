@@ -15,6 +15,7 @@ import java.util.List;
 public class PharmacyService {
 
     private final PharmacyRepository pharmacyRepository;
+    private final FeedBackService feedBackService;
 
     public List<PharmacyResponse> listPharmacy(String state, String city, String neighborhood){
         state = state.toUpperCase();
@@ -35,6 +36,8 @@ public class PharmacyService {
             log.warn("No accredited pharmacies found for the specified location: state={}, city={}, neighborhood={}", state, city, neighborhood);
             throw new ResourceNotFoundException("No accredited pharmacies were found in the specified region.");
         }
+
+        feedBackService.savedFeedback(list);
 
         return list;
     }
